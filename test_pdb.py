@@ -15,3 +15,17 @@ def test_counter():
     #pdb.set_trace()
     integers = integers_counter(data)
     assert integers == 2
+
+
+def transform_list(x):
+    x.append(1)
+    x.extend([2, 3])
+    return x
+
+
+def test_list():
+    a = []
+    # pdb.set_trace()
+    a = transform_list(a)
+    a = a + [4]
+    assert a == [1, 2, 3, 4]
