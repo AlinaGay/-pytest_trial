@@ -1,5 +1,7 @@
 import pytest
 
+from time import sleep
+
 
 def one_more(x):
     return x + 1
@@ -25,7 +27,9 @@ def test_sort():
     assert result == ['Даша', 'Маша', 'Саша', 'Яша']
 
 
+@pytest.mark.slow
 def test_type():
+    sleep(3)
     result = get_sort_list('Яша, Саша, Маша, Даша')
     assert isinstance(result, int)
 
