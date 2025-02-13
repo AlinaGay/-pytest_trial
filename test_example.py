@@ -5,15 +5,14 @@ def one_more(x):
     return x + 1
 
 
-def test_correct():
-    print("Правильный тест!")
-    assert one_more(4) == 5
-
-
-@pytest.mark.skip(reason='Что-то не работает!')
-def test_fail():
-    print('Неправильный тест!')
-    assert one_more(3) == 5
+@pytest.mark.parametrize(
+        'input_arg, expected_result',
+        [(4, 5),
+         pytest.param(3, 5, marks=pytest.mark.xfail)],
+        ids=['First parameters', 'Second parameters']
+)
+def test_one_more(input_arg, expected_result):
+    assert one_more(input_arg) == expected_result
 
 
 def get_sort_list(string):
@@ -29,3 +28,13 @@ def test_sort():
 def test_type():
     result = get_sort_list('Яша, Саша, Маша, Даша')
     assert isinstance(result, int)
+
+
+def cartesian_product(a, b):
+    return a * b
+
+
+@pytest.mark.parametrize('x', [1, 2])
+@pytest.mark.parametrize('y', ['one', 'two'])
+def test_cartesian_product(x, y):
+    assert cartesian_product(x, y) is not None
